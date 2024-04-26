@@ -7,8 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+PostTag.delete_all
 Post.delete_all
 User.delete_all
+Tag.delete_all
+
 
 User.create(
   name:"Benjamin",
@@ -36,96 +40,23 @@ User.create(
   password:"pedritopa"
 )
 
-Post.create(
-  title:"1er post",
-  content:"Es mi 1er post",
-  user_id:1,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"1er post",
-  content:"Es mi 1er post",
-  user_id:2,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"2do post",
-  content:"Es mi 2do post",
-  user_id:2,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"3er post",
-  content:"Es mi 1er post",
-  user_id:2,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"1er post",
-  content:"Es mi 1er post",
-  user_id:3,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"2do post",
-  content:"Es mi 2d0 post",
-  user_id:3,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"1er post",
-  content:"Es mi 1er post",
-  user_id:4,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"2d post",
-  content:"Es mi 2do post",
-  user_id:4,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"1er post",
-  content:"Es mi 1er post",
-  user_id:5,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"3er post",
-  content:"Me equivoqué xd",
-  user_id:5,
-  answers_count:2,
-  likes_count:3
-)
-Post.create(
-  title:"Holaaa",
-  content:"Soy nuevo",
-  user_id:1,
-  answers_count:2,
-  likes_count:3
-)
 
-Tag.create(
-  name: "Juegos"
-)
-Tag.create(
-  name: "Vida"
-)
-Tag.create(
-  name: "Moda"
-)
-Tag.create(
-  name: "Ropa"
-)
-Tag.create(
-  name: "Arte"
-)
+Tag.create(name: "Tag 1")
+Tag.create(name: "Tag 2")
+Tag.create(name: "Tag 3")
+Tag.create(name: "Tag 4")
+Tag.create(name: "Tag 5")
+
+
+PostTag.delete_all
+
+10.times do
+  Post.create(
+    title: "Post",
+    content: "This is a post",
+    user_id: User.pluck(:id).sample,
+    answers_count: 2,
+    likes_count: 3,
+    tags: Tag.all.sample(2)
+  )
+end
